@@ -21,7 +21,15 @@ function part1(input: Input): number {
 }
 
 function part2(input: Input): number {
-  return -1;
+  let total = 0;
+  input.reduce((acc, cur) => {
+    const inc = getIncrement(cur);
+    const next = acc + inc;
+    const fullTurns = Math.abs(Math.trunc(inc / 100));
+    total += fullTurns;
+    return next;
+  }, 50);
+  return total;
 }
 
 const getIncrement = (instruction: ['L' | 'R', number]) => {
