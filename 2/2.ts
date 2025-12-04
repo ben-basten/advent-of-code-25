@@ -14,7 +14,11 @@ function part1(input: Input): number {
 }
 
 function part2(input: Input): number {
-  return -1;
+  const ids = getAllIds(input);
+  return ids.reduce((sum, current) => {
+    const isValid = isValidIdPart2(current);
+    return isValid ? sum : sum + parseInt(current);
+  }, 0);
 }
 
 const getAllIds = (input: Input) => {
@@ -34,4 +38,10 @@ const isValidId = (id: string) => {
   return firstHalf !== secondHalf;
 };
 
-export { marshalInput, part1, part2, isValidId };
+const isValidIdPart2 = (id: string) => {
+  const re = /^(\d+)\1+$/;
+  const match = id.match(re);
+  return match === null;
+};
+
+export { marshalInput, part1, part2, isValidId, isValidIdPart2 };
