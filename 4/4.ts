@@ -20,8 +20,29 @@ function part1(input: Input): number {
 }
 
 function part2(input: Input): number {
-  return -1;
+  let total = 0;
+  let previousRun = 0;
+  do {
+    previousRun = countValidSquares(input);
+    total += previousRun;
+  } while (previousRun !== 0);
+  return total;
 }
+
+const countValidSquares = (input: Input) => {
+  const size = input.length;
+  return input.reduce((gridSum, row, rowIndex) => {
+    gridSum += row.reduce((colSum, _, colIndex) => {
+      const valid = checkSquare(rowIndex, colIndex, size, input);
+      if (valid) {
+        colSum += 1;
+        input[rowIndex][colIndex] = '.';
+      }
+      return colSum;
+    }, 0);
+    return gridSum;
+  }, 0);
+};
 
 const checkSquare = (row: number, col: number, size: number, input: Input) => {
   let totalBarriers = 0;
