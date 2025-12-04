@@ -1,6 +1,6 @@
 import { getInput } from '../common/fetch.js';
 import timer from '../common/timer.js';
-import { marshalInput, part1 } from './day.js';
+import { marshalInput, part1, part2 } from './day.js';
 
 async function main() {
   const rawInput = await getInput(1);
