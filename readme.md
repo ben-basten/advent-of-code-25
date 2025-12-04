@@ -1,4 +1,4 @@
-# Advent of Code
+# Advent of Code 2025
 
 Version control for the Advent of Code challenges.
 

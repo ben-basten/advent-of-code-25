@@ -1,9 +1,20 @@
 type Direction = { x: -1 | 0 | 1; y: -1 | 0 | 1 };
 
-const adjacent: Direction[] = [
+const orthogonal: Direction[] = [
   { x: 0, y: -1 }, // up
   { x: 1, y: 0 }, // right
   { x: 0, y: 1 }, // down
+  { x: -1, y: 0 }, // left
+];
+
+const adjacent: Direction[] = [
+  { x: 0, y: -1 }, // up
+  { x: -1, y: -1 }, // top left
+  { x: 1, y: -1 }, // top right
+  { x: 1, y: 0 }, // right
+  { x: 0, y: 1 }, // down
+  { x: -1, y: 1 }, // bottom left
+  { x: 1, y: 1 }, // bottom right
   { x: -1, y: 0 }, // left
 ];
 
@@ -34,4 +45,4 @@ function hash(coord: [number, number]) {
   return `${x},${y}`;
 }
 
-export { adjacent, nextCoord, hash, rotateDirection, Direction };
+export { orthogonal, adjacent, nextCoord, hash, rotateDirection, Direction };
