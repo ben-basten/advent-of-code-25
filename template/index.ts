@@ -11,10 +11,10 @@ async function main() {
   console.log(`Part 1: ${answer1}`);
   timer.stop();
 
-  // timer.start('Part 2');
-  // const answer2 = part2(data);
-  // console.log(`Part 2: ${answer2}`);
-  // timer.stop();
+  timer.start('Part 2');
+  const answer2 = part2(data);
+  console.log(`Part 2: ${answer2}`);
+  timer.stop();
 
   timer.printAll();
 }
