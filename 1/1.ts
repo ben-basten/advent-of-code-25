@@ -42,24 +42,4 @@ const getIncrement = (instruction: ['L' | 'R', number]) => {
   return dir === 'L' ? count * -1 : count;
 };
 
-const getFullTurns = (inc: number) => {
-  return Math.abs(Math.trunc(inc / 100));
-};
-
-const getMinuteTurns = (current: number, increment: number) => {
-  const modCurrent = current % 100;
-  const isPositive = modCurrent > 0;
-  const modIncrement = increment % 100;
-  if (modIncrement === 0 || modCurrent === 0) {
-    return 0;
-  }
-  const sum = modCurrent + modIncrement;
-  if (isPositive && (sum >= 100 || sum < 0)) {
-    return 1;
-  } else if (!isPositive && (sum > 0 || sum <= -100)) {
-    return 1;
-  }
-  return 0;
-};
-
-export { marshalInput, part1, part2, getMinuteTurns, getFullTurns };
+export { marshalInput, part1, part2 };
