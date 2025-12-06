@@ -13,4 +13,4 @@ Version control for the Advent of Code challenges.
 
 ## Helpful Reddit posts
 
-N/A
+- Day 5, Part 2: https://www.reddit.com/r/adventofcode/comments/1pepx3m/2025_day_5_a_fast_algorithm/

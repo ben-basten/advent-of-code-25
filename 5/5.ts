@@ -56,7 +56,8 @@ const combineRanges = (input: Range[]): Range[] => {
     if (currentLow > previousHigh + 1) {
       combined.push([currentLow, currentHigh]);
     } else {
-      combined[lastIndex] = [previousLow, currentHigh];
+      // the previous range can have a maximum greater than the current range
+      combined[lastIndex] = [previousLow, Math.max(previousHigh, currentHigh)];
     }
     return combined;
   }, [] as Range[]);
