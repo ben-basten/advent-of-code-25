@@ -42,8 +42,34 @@ const calc = (operations: Operation[]) => {
   }, 0);
 };
 
-function part2(input: Input): number {
-  return -1;
+const marshalPart2 = (input: string) => {
+  const lines = input.split('\n');
+  const result: Operation[] = [];
+  for (let col = 0; col < lines[0].length; col++) {
+    let rowString = '';
+    for (let row = 0; row < lines.length; row++) {
+      rowString += lines[row][col];
+    }
+    rowString = rowString.replaceAll(' ', '');
+    if (!rowString) {
+      continue;
+    }
+    const lastChar = rowString[rowString.length - 1];
+    if (lastChar === '*' || lastChar === '+') {
+      result.push({
+        op: lastChar,
+        data: [rowString.substring(0, rowString.length - 1)],
+      });
+    } else {
+      result[result.length - 1].data.push(rowString);
+    }
+  }
+  return result;
+};
+
+function part2(input: string): number {
+  const operations = marshalPart2(input);
+  return calc(operations);
 }
 
 export { marshalInput, part1, part2 };

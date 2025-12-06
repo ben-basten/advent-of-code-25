@@ -12,7 +12,7 @@ async function main() {
   timer.stop();
 
   timer.start('Part 2');
-  const answer2 = part2(data);
+  const answer2 = part2(rawInput);
   console.log(`Part 2: ${answer2}`);
   timer.stop();
 
