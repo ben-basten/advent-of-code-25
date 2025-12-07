@@ -1,4 +1,5 @@
 type Direction = { x: -1 | 0 | 1; y: -1 | 0 | 1 };
+type Coord = [number, number];
 
 const orthogonal: Direction[] = [
   { x: 0, y: -1 }, // up
@@ -45,4 +46,12 @@ function hash(coord: [number, number]) {
   return `${x},${y}`;
 }
 
-export { orthogonal, adjacent, nextCoord, hash, rotateDirection, Direction };
+export {
+  orthogonal,
+  adjacent,
+  nextCoord,
+  hash,
+  rotateDirection,
+  Direction,
+  Coord,
+};
