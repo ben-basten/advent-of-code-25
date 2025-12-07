@@ -1,7 +1,6 @@
 import { Coord, Direction, hash, nextCoord } from '../common/array';
 
 type Input = string[][];
-const BEAM = '|';
 const SPLITTER = '^';
 
 const directions = {
@@ -39,7 +38,33 @@ function part1(input: Input): number {
 }
 
 function part2(input: Input): number {
-  return -1;
+  const startingX = findStartingX(input);
+  const visited = new Map<string, number>();
+
+  const countPaths = (current: Coord): number => {
+    const [x, y] = current;
+    if (y === input.length) {
+      return 1;
+    }
+    const currentHash = hash(current);
+    if (visited.has(currentHash)) {
+      return visited.get(currentHash) ?? 0;
+    }
+
+    const item = input[y][x];
+    let count;
+    if (item === SPLITTER) {
+      count =
+        countPaths(nextCoord(current, directions.dl)) +
+        countPaths(nextCoord(current, directions.dr));
+    } else {
+      count = countPaths(nextCoord(current, directions.d));
+    }
+    visited.set(currentHash, count);
+    return count;
+  };
+
+  return countPaths([startingX, 1]);
 }
 
 const findStartingX = (input: Input) => {
