@@ -27,26 +27,28 @@ function part1(input: Input): number {
 
 function part2(input: Input): number {
   const map = generateMap(input);
-  const checkNode = (
-    key: string,
-    dac: boolean = false,
-    fft: boolean = false
-  ): number => {
+  const visited = new Map<string, number>();
+  const checkNode = (key: string, target: string): number => {
+    const cache = visited.get(`${key},${target}`);
+    if (cache !== undefined) return cache;
     const entry = map.get(key);
     if (!entry || entry.length === 0) {
       return 0;
     }
-    return entry.reduce((total, current) => {
-      if (current === END) {
-        return dac && fft ? total + 1 : total;
+    const retVal = entry.reduce((total, current) => {
+      if (current === target) {
+        return total + 1;
       } else {
-        const hasDac = dac || current === 'dac';
-        const hasFft = fft || current === 'fft';
-        return total + checkNode(current, hasDac, hasFft);
+        return total + checkNode(current, target);
       }
     }, 0);
+    visited.set(`${key},${target}`, retVal);
+    return retVal;
   };
-  return checkNode('svr');
+  return (
+    checkNode('svr', 'dac') * checkNode('dac', 'fft') * checkNode('fft', END) +
+    checkNode('svr', 'fft') * checkNode('fft', 'dac') * checkNode('dac', END)
+  );
 }
 
 const generateMap = (input: Input) => {
